@@ -70,5 +70,24 @@ The dataset should be structured as follows:
 - Saves compressed images into the new dataset at `dest_path`.  
 
 ---
+## Example Usage
 
+```python
+dataset_path = "path to dataset"
+image_shape = (0, 0)  # expected shape
 
+# Load dataset
+ds = Dataset(dataset_path, expected_shape=image_shape)
+ds.load_data()
+X, Y = ds.X, ds.Y 
+
+# Shuffle the dataset
+from sklearn.utils import shuffle
+X, Y = shuffle(X, Y, random_state=42)  
+
+# Split into training and test sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(
+    X, Y, test_size=0.3, random_state=42
+)
+```
